@@ -1,20 +1,15 @@
-#!/usr/bin/env bash
+# create-issues.ps1
 # Creates GitHub issues for the Oqtane Module CLI project.
-# Usage: ./create-issues.sh
+# Usage: .\create-issues.ps1
 # Requires: gh CLI authenticated (run `gh auth login` first)
 
-set -euo pipefail
+$ErrorActionPreference = "Stop"
+$Repo = "markdav-is/oqtane-module-cli"
 
-REPO="markdav-is/oqtane-module-cli"
-
-echo "Creating issues for $REPO..."
-echo ""
+Write-Host "Creating issues for $Repo...`n"
 
 # ── Issue 1: Project Setup ──────────────────────────────────────────────────
-gh issue create --repo "$REPO" \
-  --title "Project Setup: .NET 10 console app with System.CommandLine" \
-  --label "phase:0-setup" \
-  --body "$(cat <<'BODY'
+$body = @'
 ## Summary
 Set up the initial .NET 10 console project with required dependencies and folder structure. This is the foundation everything else builds on.
 
@@ -49,15 +44,12 @@ Set up the initial .NET 10 console project with required dependencies and folder
 ## References
 - [oqtane-cli-prompt.md — Project Structure](specs/oqtane-cli-prompt.md)
 - [oqtane-module-cli-specification.md — NuGet Package Configuration](specs/oqtane-module-cli-specification.md)
-BODY
-)"
-echo "✓ Issue 1 created: Project Setup"
+'@
+gh issue create --repo $Repo --title "Project Setup: .NET 10 console app with System.CommandLine" --label "phase:0-setup" --body $body
+Write-Host "Issue 1 created: Project Setup" -ForegroundColor Green
 
 # ── Issue 2: CLI Command Parsing ────────────────────────────────────────────
-gh issue create --repo "$REPO" \
-  --title "Phase 1: CLI command parsing with System.CommandLine" \
-  --label "phase:1-cli" \
-  --body "$(cat <<'BODY'
+$body = @'
 ## Summary
 Implement the command structure using System.CommandLine so the tool accepts and validates user input.
 
@@ -92,15 +84,12 @@ Implement the command structure using System.CommandLine so the tool accepts and
 ## References
 - [oqtane-cli-prompt.md — Phase 1: Basic CLI](specs/oqtane-cli-prompt.md)
 - [oqtane-module-cli-specification.md — Command Structure & Option Details](specs/oqtane-module-cli-specification.md)
-BODY
-)"
-echo "✓ Issue 2 created: CLI Command Parsing"
+'@
+gh issue create --repo $Repo --title "Phase 1: CLI command parsing with System.CommandLine" --label "phase:1-cli" --body $body
+Write-Host "Issue 2 created: CLI Command Parsing" -ForegroundColor Green
 
 # ── Issue 3: Template Discovery ─────────────────────────────────────────────
-gh issue create --repo "$REPO" \
-  --title "Phase 2: Template discovery and manifest parsing" \
-  --label "phase:2-templates" \
-  --body "$(cat <<'BODY'
+$body = @'
 ## Summary
 Implement `ITemplateService` to locate Oqtane template directories and parse `template.json` manifest files.
 
@@ -136,15 +125,12 @@ Implement `ITemplateService` to locate Oqtane template directories and parse `te
 ## References
 - [oqtane-cli-prompt.md — Phase 2: Template Discovery](specs/oqtane-cli-prompt.md)
 - [oqtane-module-cli-specification.md — Template Discovery & Manifest Format](specs/oqtane-module-cli-specification.md)
-BODY
-)"
-echo "✓ Issue 3 created: Template Discovery"
+'@
+gh issue create --repo $Repo --title "Phase 2: Template discovery and manifest parsing" --label "phase:2-templates" --body $body
+Write-Host "Issue 3 created: Template Discovery" -ForegroundColor Green
 
 # ── Issue 4: Token Replacement ──────────────────────────────────────────────
-gh issue create --repo "$REPO" \
-  --title "Phase 3: Token replacement service" \
-  --label "phase:3-tokens" \
-  --body "$(cat <<'BODY'
+$body = @'
 ## Summary
 Implement `ITokenReplacementService` to replace Oqtane tokens in file contents and file/directory names.
 
@@ -178,15 +164,12 @@ Implement `ITokenReplacementService` to replace Oqtane tokens in file contents a
 ## References
 - [oqtane-cli-prompt.md — Token Replacement](specs/oqtane-cli-prompt.md)
 - [oqtane-module-cli-specification.md — Token Replacement](specs/oqtane-module-cli-specification.md)
-BODY
-)"
-echo "✓ Issue 4 created: Token Replacement"
+'@
+gh issue create --repo $Repo --title "Phase 3: Token replacement service" --label "phase:3-tokens" --body $body
+Write-Host "Issue 4 created: Token Replacement" -ForegroundColor Green
 
 # ── Issue 5: File Generation ────────────────────────────────────────────────
-gh issue create --repo "$REPO" \
-  --title "Phase 4: File generation from templates" \
-  --label "phase:4-files" \
-  --body "$(cat <<'BODY'
+$body = @'
 ## Summary
 Implement `IFileService` to create the module directory structure and copy/process template files with token replacement.
 
@@ -223,15 +206,12 @@ Implement `IFileService` to create the module directory structure and copy/proce
 ## References
 - [oqtane-cli-prompt.md — Phase 4: File Creation](specs/oqtane-cli-prompt.md)
 - [oqtane-module-cli-specification.md — File Operations](specs/oqtane-module-cli-specification.md)
-BODY
-)"
-echo "✓ Issue 5 created: File Generation"
+'@
+gh issue create --repo $Repo --title "Phase 4: File generation from templates" --label "phase:4-files" --body $body
+Write-Host "Issue 5 created: File Generation" -ForegroundColor Green
 
 # ── Issue 6: Solution File Integration ──────────────────────────────────────
-gh issue create --repo "$REPO" \
-  --title "Phase 5: Solution file integration (.sln and .slnx)" \
-  --label "phase:5-solution" \
-  --body "$(cat <<'BODY'
+$body = @'
 ## Summary
 Implement `ISolutionService` to detect solution file format and add newly created module projects to the solution.
 
@@ -265,20 +245,17 @@ Implement `ISolutionService` to detect solution file format and add newly create
 ## References
 - [oqtane-cli-prompt.md — Phase 5: Solution Integration](specs/oqtane-cli-prompt.md)
 - [oqtane-module-cli-specification.md — Solution File Management](specs/oqtane-module-cli-specification.md)
-BODY
-)"
-echo "✓ Issue 6 created: Solution File Integration"
+'@
+gh issue create --repo $Repo --title "Phase 5: Solution file integration (.sln and .slnx)" --label "phase:5-solution" --body $body
+Write-Host "Issue 6 created: Solution File Integration" -ForegroundColor Green
 
 # ── Issue 7: Error Handling & Polish ────────────────────────────────────────
-gh issue create --repo "$REPO" \
-  --title "Phase 6: Error handling, validation, and success messages" \
-  --label "phase:6-polish" \
-  --body "$(cat <<'BODY'
+$body = @'
 ## Summary
 Add robust error handling, user-friendly messages, and overall UX polish to the CLI.
 
 ## Depends On
-- All previous phases (1–5)
+- All previous phases (1-5)
 
 ## Tasks
 - [ ] Implement all specified error messages:
@@ -288,7 +265,7 @@ Add robust error handling, user-friendly messages, and overall UX polish to the 
   - Template not found (suggest `oqtane module list`)
 - [ ] Implement success message with summary:
   ```
-  ✓ Module created successfully!
+  Module created successfully!
 
     Owner: MarkDav
     Name: WeatherArbitrage
@@ -315,15 +292,12 @@ Add robust error handling, user-friendly messages, and overall UX polish to the 
 ## References
 - [oqtane-cli-prompt.md — Error Cases to Handle](specs/oqtane-cli-prompt.md)
 - [oqtane-module-cli-specification.md — Error Handling & Success Messages](specs/oqtane-module-cli-specification.md)
-BODY
-)"
-echo "✓ Issue 7 created: Error Handling & Polish"
+'@
+gh issue create --repo $Repo --title "Phase 6: Error handling, validation, and success messages" --label "phase:6-polish" --body $body
+Write-Host "Issue 7 created: Error Handling & Polish" -ForegroundColor Green
 
 # ── Issue 8: Module List Command ────────────────────────────────────────────
-gh issue create --repo "$REPO" \
-  --title "Implement 'oqtane module list' command" \
-  --label "phase:6-polish" \
-  --body "$(cat <<'BODY'
+$body = @'
 ## Summary
 Implement the `oqtane module list` command to show available module templates.
 
@@ -349,20 +323,17 @@ Implement the `oqtane module list` command to show available module templates.
 
 ## References
 - [oqtane-module-cli-specification.md — List Available Templates](specs/oqtane-module-cli-specification.md)
-BODY
-)"
-echo "✓ Issue 8 created: Module List Command"
+'@
+gh issue create --repo $Repo --title "Implement 'oqtane module list' command" --label "phase:6-polish" --body $body
+Write-Host "Issue 8 created: Module List Command" -ForegroundColor Green
 
 # ── Issue 9: Testing Suite ──────────────────────────────────────────────────
-gh issue create --repo "$REPO" \
-  --title "Add unit and integration test suite" \
-  --label "testing" \
-  --body "$(cat <<'BODY'
+$body = @'
 ## Summary
 Create a test project with unit tests for core services and integration tests for the end-to-end workflow.
 
 ## Depends On
-- Phases 1–5 (test as each phase lands)
+- Phases 1-5 (test as each phase lands)
 
 ## Tasks
 - [ ] Create `MarkDav.Oqtane.Cli.Tests` xUnit test project
@@ -383,7 +354,7 @@ Create a test project with unit tests for core services and integration tests fo
 
 ## Acceptance Criteria
 - `dotnet test` passes on all platforms
-- Code coverage for token replacement ≥ 90%
+- Code coverage for token replacement >= 90%
 - Integration test creates and verifies a complete module from fixtures
 - Tests run in CI (once CI is set up)
 
@@ -395,15 +366,12 @@ Create a test project with unit tests for core services and integration tests fo
 ## References
 - [oqtane-cli-prompt.md — Testing Approach](specs/oqtane-cli-prompt.md)
 - [oqtane-module-cli-specification.md — Testing Strategy](specs/oqtane-module-cli-specification.md)
-BODY
-)"
-echo "✓ Issue 9 created: Testing Suite"
+'@
+gh issue create --repo $Repo --title "Add unit and integration test suite" --label "testing" --body $body
+Write-Host "Issue 9 created: Testing Suite" -ForegroundColor Green
 
 # ── Issue 10: NuGet Packaging & CI/CD ───────────────────────────────────────
-gh issue create --repo "$REPO" \
-  --title "NuGet packaging, GitHub Actions CI/CD, and release workflow" \
-  --label "infrastructure" \
-  --body "$(cat <<'BODY'
+$body = @'
 ## Summary
 Set up NuGet packaging, CI/CD pipeline, and release workflow so the tool can be distributed.
 
@@ -437,12 +405,10 @@ Set up NuGet packaging, CI/CD pipeline, and release workflow so the tool can be 
 ## References
 - [oqtane-module-cli-specification.md — Distribution](specs/oqtane-module-cli-specification.md)
 - [oqtane-module-cli-specification.md — Compatibility Matrix](specs/oqtane-module-cli-specification.md)
-BODY
-)"
-echo "✓ Issue 10 created: NuGet Packaging & CI/CD"
+'@
+gh issue create --repo $Repo --title "NuGet packaging, GitHub Actions CI/CD, and release workflow" --label "infrastructure" --body $body
+Write-Host "Issue 10 created: NuGet Packaging & CI/CD" -ForegroundColor Green
 
-echo ""
-echo "════════════════════════════════════════════"
-echo "  All 10 issues created successfully!"
-echo "  View them: gh issue list --repo $REPO"
-echo "════════════════════════════════════════════"
+Write-Host ""
+Write-Host "All 10 issues created successfully!" -ForegroundColor Cyan
+Write-Host "View them: gh issue list --repo $Repo" -ForegroundColor Cyan

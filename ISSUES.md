@@ -1,7 +1,7 @@
 # Oqtane Module CLI — Issue Breakdown
 
 Work breakdown for the Oqtane Module CLI tool, organized by implementation phase.
-Run `./create-issues.sh` to create these as GitHub issues (requires `gh` CLI authenticated).
+Run `.\create-issues.ps1` in PowerShell to create these as GitHub issues (requires `gh` CLI authenticated).
 
 ---
 
