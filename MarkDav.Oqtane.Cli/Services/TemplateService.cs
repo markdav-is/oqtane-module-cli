@@ -5,7 +5,7 @@ namespace MarkDav.Oqtane.Cli.Services;
 
 public class TemplateService : ITemplateService
 {
-    private const string TemplatesRelativePath = "Oqtane.Server/wwwroot/Modules/Templates";
+    private static readonly string TemplatesRelativePath = Path.Combine("Oqtane.Server", "wwwroot", "Modules", "Templates");
     private const string ManifestFileName = "template.json";
 
     public string? FindSolutionDirectory(string startPath)

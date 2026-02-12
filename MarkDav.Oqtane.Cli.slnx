@@ -1,5 +1,5 @@
 <Solution>
-  <Folder Name="/src/">
-    <Project Path="src/MarkDav.Oqtane.Cli/MarkDav.Oqtane.Cli.csproj" />
-  </Folder>
+  <Project Path="MarkDav.Oqtane.Cli.Tests/MarkDav.Oqtane.Cli.Tests.csproj" />
+  <Project Path="MarkDav.Oqtane.Cli/MarkDav.Oqtane.Cli.csproj" />
+  <Project Path="Specs/Specs.csproj" Id="66767f47-0ecb-47e7-8785-baaed892cd51" />
 </Solution>
